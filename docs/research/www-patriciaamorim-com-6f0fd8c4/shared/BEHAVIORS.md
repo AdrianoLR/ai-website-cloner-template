@@ -7,8 +7,8 @@ value moves `max(1 - N/100, 0.01)` of the remaining distance to its target.
 ## Time-driven (page load)
 | Effect | Pages | Detail |
 | --- | --- | --- |
-| Preloader hide | all | `.preloader` shown, `.layout` opacity 0 → both cross-fade over 500ms, then `display:none` |
-| Rotated characters | /contact only (the load classes exist on /about and /project/* but nothing triggers them there) | each `.load-Nth-item` starts `translate3d(5vw,20vh,-15vw) rotateY(90deg)`, opacity 0; after 500ms + 50ms·(N-1) it moves to identity over 1500ms and fades in over 1300ms, both `cubic-bezier(.425,.005,0,1)` |
+| Preloader hide | all | `.preloader` shown, `.layout` opacity 0 → both cross-fade over 500ms, then `display:none`. The fade starts on the window `load` event (measured 1.3–2.0s after navigation); the clone holds a fixed 1750ms instead |
+| Rotated characters | /contact only (the load classes exist on /about and /project/* but nothing triggers them there) | each `.load-Nth-item` starts `translate3d(5vw,20vh,-15vw) rotateY(90deg)`, opacity 0; after 500ms + 50ms·(N-1) it moves to identity over 1500ms and fades in over 1300ms, both `cubic-bezier(.425,.005,0,1)`. The delays count from the `load` event, so the first letter starts as the preloader finishes fading. `.load-10th-item` (the last letter of /contact) has no fade: it stays at opacity 1 and only moves |
 | Show on load | /contact | `.show-on-load` opacity 0 → 1, delay 700ms, 1000ms, same easing |
 
 ## Scroll-driven
@@ -17,15 +17,16 @@ value moves `max(1 - N/100, 0.01)` of the remaining distance to its target.
 | Next chapter / hero | `.next-chapter-trigger` (0-height, 100vh below the hero top) crossing the viewport | `._1st-section-wrapper` translateY 0 → -20vh, scale 1 → .95, opacity 1 → .25; `._1st-section` background #222 → #000; `.image-wrapper` translateY 0 → -50%, rotate 0 → 8deg | 76 | >=992px |
 | Footer show | `.footer-trigger` (0-height, end of `.content`) crossing the viewport | `.footer` translateY 25% → 0, scale .9 → 1, opacity .25 → 1 | 80 | >=992px |
 | Scrolling loop left / right | `.about-scrolling-left` / `-right` crossing the viewport | translateX 0 → -25% / -25% → 0 | 100 | all |
-| Title slide + thumbnail drift | `.thumb-item` / `.thumb-perspective` | see the home page BEHAVIORS.md | 20 / 50 | all / >=992px |
+| Title slide + thumbnail drift | `.thumb-item` / `.thumb-perspective` | see the home page BEHAVIORS.md. Drift re-measured on /exhibitions at 1440, 1280 and 1100px: with T = block top and V = viewport height it settles at `2.5% − 15%·T/V` scrolling down and `2.0% − 15%·T/V` scrolling up (clamped to ±15%); the clone uses the midpoint `2.25% − 15%·T/V` (= `−12.75% + 30%·p`) | 20 / 50 | all / >=992px |
 
 Progress is 0 when the trigger's top meets the viewport bottom and 1 when its bottom leaves the top.
 The home page has no `.footer-trigger`; /contact has neither it nor the fixed navigation.
+On /exhibitions/* the footer sits inside `.content`, so on desktop it is pinned behind the page from the start and shows through the list at the reveal's start state.
 
 ## Pointer-driven
 | Effect | Target | Detail |
 | --- | --- | --- |
-| Scroll-down ring | `.scroll-down-link` (about + project heroes) | follows the pointer inside itself: translate ±3vw on both axes, rest at 0, smoothing 96. Hover: background `#fff3`, border-width 0, 300ms. Click: smooth scroll to `#content` (/about) or `#content-1` (/project/*) |
+| Scroll-down ring | `.scroll-down-link` (about + project heroes) | follows the pointer inside itself: translate ±3vw on both axes, rest at 0, smoothing 96. Hover: background `#fff3`, border-width 0, 300ms. Click: smooth scroll to `#content` (/about, /exhibitions/*) or `#content-1` (/project/*) |
 | Award row in/out | `.award-link` | padding-inline 0 ↔ 2em (700ms `cubic-bezier(.2,1,.23,1)`, >=992px); `.award-bg` height 0 ↔ 100% with the same timing |
 | Award backdrop tint | `.award-bg` | inline `opacity:0`; a click on the row fades it to 1 (Webflow "fade in" preset), so the tint is only visible on rows that were clicked |
 | Award image show/hide | `.award-image-aspect-ratio`, `.award-image` | scale .6 ↔ 1 and 1.4 ↔ 1; opacity 0 ↔ 1. In: 100ms delay, 900ms (opacity 300ms). Out: 800ms (opacity 250ms) |

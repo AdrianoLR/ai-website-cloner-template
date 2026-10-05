@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import type { RichBlock, RichInline } from "@/types/patricia-amorim";
 
-const blockClasses: Record<RichBlock["tag"], string | undefined> = {
+const blockClasses: Record<Exclude<RichBlock["tag"], "ul">, string | undefined> = {
   h1: "text-[38px] leading-[44px] font-bold",
   h2: "text-[32px] leading-[36px] font-bold",
   h3: "text-[24px] leading-[30px] font-bold",
@@ -33,11 +33,22 @@ export function RichInlines({ nodes }: { nodes: RichInline[] }) {
   });
 }
 
-/** CMS rich text: headings, paragraphs and quotes with inline emphasis. */
+/** CMS rich text: headings, paragraphs, quotes and bullet lists with inline emphasis. */
 export function RichText({ blocks, className }: { blocks: RichBlock[]; className?: string }) {
   return (
     <div className={className}>
       {blocks.map((block, index) => {
+        if (block.tag === "ul") {
+          return (
+            <ul key={index} className="mb-[10px] list-disc pl-[40px]">
+              {block.items.map((item, itemIndex) => (
+                <li key={itemIndex}>
+                  <RichInlines nodes={item} />
+                </li>
+              ))}
+            </ul>
+          );
+        }
         const Tag = block.tag;
         return (
           <Tag key={index} className={blockClasses[block.tag]}>

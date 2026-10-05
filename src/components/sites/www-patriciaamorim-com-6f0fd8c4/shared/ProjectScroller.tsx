@@ -15,6 +15,8 @@ interface ProjectScrollerProps {
   listId?: string;
   /** Extra classes for the outer wrapper (the inner pages pad its bottom). */
   className?: string;
+  /** Heading element of the titles; the exhibition detail pages use h1. */
+  titleTag?: "h1" | "h2";
 }
 
 /**
@@ -27,6 +29,7 @@ export function ProjectScroller({
   offsetWrapperCount = 0,
   listId,
   className,
+  titleTag: TitleTag = "h2",
 }: ProjectScrollerProps) {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const layerRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -109,14 +112,14 @@ export function ProjectScroller({
                   href={item.href}
                   className="flex max-w-full flex-col items-center overflow-hidden text-white"
                 >
-                  <h2
+                  <TitleTag
                     ref={(node) => {
                       titleRefs.current[index] = node;
                     }}
                     className="relative m-0 px-[0.2em] pt-[0.13em] text-center font-display text-[24em] leading-[0.8] font-bold tracking-[-0.01em] whitespace-pre-wrap text-brand uppercase will-change-transform max-[991px]:text-[12em] max-[991px]:leading-[0.7] max-[767px]:text-[8em] max-[479px]:text-[6em]"
                   >
                     {item.title}
-                  </h2>
+                  </TitleTag>
                 </Link>
               </div>
               <div

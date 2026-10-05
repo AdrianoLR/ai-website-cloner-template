@@ -33,11 +33,13 @@ interface ProjectSectionViewProps {
 }
 
 /**
- * One content band of a project page: optional cover image and clips, the
- * gallery (one column, or two for the "grid" layout) and the write-up.
+ * One content band of a project or exhibition page: optional cover image and
+ * clips, the gallery (one column, or two for the "grid" layout) and the write-up.
  */
 export function ProjectSectionView({ section, id }: ProjectSectionViewProps) {
   const grid = section.layout === "grid";
+  // Exhibition galleries sit in a two-column grid whose items span both columns, one per row.
+  const rows = section.layout === "rows";
 
   return (
     <div id={id} className={cn(sectionBand, "min-w-1/2 font-sans")}>
@@ -52,19 +54,26 @@ export function ProjectSectionView({ section, id }: ProjectSectionViewProps) {
         />
       )}
       {section.coverVideo && (
-        <BackgroundVideo video={section.coverVideo} className="min-[1280px]:h-[50vw]" />
+        <BackgroundVideo
+          video={section.coverVideo}
+          className={rows ? "min-[1280px]:h-screen" : "min-[1280px]:h-[50vw]"}
+        />
       )}
       <div>
         <div
           className={cn(
             "grid auto-cols-fr grid-rows-[auto_1fr] gap-[1em] min-[1280px]:place-content-stretch min-[1280px]:place-items-baseline",
             grid ? "grid-cols-2 max-[767px]:grid-cols-1" : "grid-cols-1",
+            rows && "min-[1280px]:grid-cols-2",
           )}
         >
           {section.gallery.map((image) => (
             <div
               key={image.src}
-              className="flex w-full min-w-full justify-center text-center min-[1280px]:row-span-2 min-[1440px]:block"
+              className={cn(
+                "flex w-full min-w-full justify-center text-center min-[1440px]:block",
+                rows ? "min-[1280px]:col-span-2" : "min-[1280px]:row-span-2",
+              )}
             >
               <Image
                 src={image.src}
@@ -83,7 +92,9 @@ export function ProjectSectionView({ section, id }: ProjectSectionViewProps) {
       )}
       <div>
         <div className="grid grid-cols-1 gap-[2em]">
-          <RichText blocks={section.body} className={cn(textMedium, "min-[1280px]:py-[1.1em]")} />
+          {section.body.length > 0 && (
+            <RichText blocks={section.body} className={cn(textMedium, "min-[1280px]:py-[1.1em]")} />
+          )}
         </div>
       </div>
     </div>

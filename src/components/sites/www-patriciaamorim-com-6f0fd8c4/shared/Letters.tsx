@@ -57,7 +57,8 @@ export function Letters({ letters, animated = false }: LettersProps) {
         className={cn(
           fullSizeSlots.has(letter.order) ? "relative" : "min-[1440px]:text-[0.8em]",
           letter.order === 10 && "min-[1440px]:leading-[0.6]",
-          animated && "animate-letter-in",
+          // The source binds no fade to slot 10: that letter swings in at full opacity.
+          animated && (letter.order === 10 ? "animate-letter-swing" : "animate-letter-in"),
           animated && swingDelays[letter.order - 1],
         )}
       >

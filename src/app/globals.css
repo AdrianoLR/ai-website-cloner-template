@@ -10,7 +10,9 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-humane), sans-serif;
   --font-serif-accent: var(--font-shocka-serif), sans-serif;
-  --font-body-alt: var(--font-montserrat), sans-serif;
+  /* Named directly, not via --font-montserrat: that variable inserts a size-adjusted fallback
+     face, which widens glyphs Montserrat lacks (such as "∩") and changes line breaks. */
+  --font-body-alt: "Montserrat", sans-serif;
   --color-divider: #ffffff1a;
   --color-canvas: #222;
   --color-canvas-muted: #000;
@@ -171,6 +173,10 @@
   animation:
     letter-swing-in 1500ms cubic-bezier(0.425, 0.005, 0, 1) both,
     fade-in 1300ms cubic-bezier(0.425, 0.005, 0, 1) both;
+}
+@utility animate-letter-swing {
+  transform-style: preserve-3d;
+  animation: letter-swing-in 1500ms cubic-bezier(0.425, 0.005, 0, 1) both;
 }
 @utility animate-show-on-load {
   animation: fade-in 1000ms cubic-bezier(0.425, 0.005, 0, 1) 2450ms both;

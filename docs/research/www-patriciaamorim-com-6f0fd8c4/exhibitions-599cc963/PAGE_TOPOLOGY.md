@@ -15,6 +15,6 @@ Document height: 13804px @1440x900, 12800px @768x1024, 10550px @390x844.
 - Same block as the home page's project list (`../root-8a5edab2/components/ProjectScroller.spec.md`): fixed screen-blended
   title sliding +100% → -100%, thumbnail 27vw / 40vw / 75vw at 4:5 with brightness(.5), 15% bottom margin per block at >=1440px.
 - Differences from the home page: no scroll indicator, no 25px wrapper offsets, no anchor ids, 50vh bottom padding, footer reveal.
-- 11 exhibitions (`exhibitions-599cc963/content.ts`), titles verbatim, empty alt text; links go to `/exhibitions/<slug>` (not cloned).
+- 11 exhibitions (`exhibitions-599cc963/content.ts`), titles verbatim, empty alt text; links go to the `/exhibitions/<slug>` detail pages (`../shared/components/ExhibitionPage.spec.md`).
 - Assets (11): `public/sites/www-patriciaamorim-com-6f0fd8c4/exhibitions-599cc963/images/`.
 - Behaviors: `../shared/BEHAVIORS.md`; shell: `../shared/components/SitePage.spec.md`.

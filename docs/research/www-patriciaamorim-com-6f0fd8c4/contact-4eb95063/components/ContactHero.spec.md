@@ -52,7 +52,7 @@
 
 ## States & Behaviors
 ### Load-in (after the preloader)
-- **Letters:** from `translate3d(5vw,20vh,-15vw) rotateY(90deg)`, opacity 0 → identity, opacity 1; 1500ms move / 1300ms fade, `cubic-bezier(.425,.005,0,1)`; start 500ms + 50ms per letter (10 letters)
+- **Letters:** from `translate3d(5vw,20vh,-15vw) rotateY(90deg)`, opacity 0 → identity, opacity 1; 1500ms move / 1300ms fade, `cubic-bezier(.425,.005,0,1)`; start 500ms + 50ms per letter (10 letters), counted from the window `load` event, which is also when the preloader starts its 500ms fade. The 10th letter ("h") has no fade: opacity 1 throughout (`animate-letter-swing`)
 - **`.show-on-load` (4 blocks + 2 dividers):** opacity 0 → 1, 1000ms, delay 700ms
 - **Implementation approach:** CSS keyframes (`animate-letter-in`, `animate-show-on-load`) with fixed delays offset by the preloader hold
 

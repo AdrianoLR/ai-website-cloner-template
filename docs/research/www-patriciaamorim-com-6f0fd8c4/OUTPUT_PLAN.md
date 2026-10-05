@@ -24,6 +24,17 @@ Single application (app root `.`), site key `www-patriciaamorim-com-6f0fd8c4`. T
 | https://www.patriciaamorim.com/project/duplo-series | `project-duplo-series-7fc85262` | `src/app/project/[slug]/page.tsx` | 11 |
 | https://www.patriciaamorim.com/project/alchemy-of-form | `project-alchemy-of-form-d969cd1e` | `src/app/project/[slug]/page.tsx` | 17 |
 | https://www.patriciaamorim.com/project/mirage-reveries | `project-mirage-reveries-d7da5d79` | `src/app/project/[slug]/page.tsx` | 13 |
+| https://www.patriciaamorim.com/exhibitions/cleanse | `exhibitions-cleanse-63f2ef2e` | `src/app/exhibitions/[slug]/page.tsx` | 15 |
+| https://www.patriciaamorim.com/exhibitions/between-light-traces-and-the-archive | `exhibitions-between-light-traces-and-the-archive-36dccd9b` | `src/app/exhibitions/[slug]/page.tsx` | 8 |
+| https://www.patriciaamorim.com/exhibitions/searching-my-work | `exhibitions-searching-my-work-0a5f4ffb` | `src/app/exhibitions/[slug]/page.tsx` | 13 |
+| https://www.patriciaamorim.com/exhibitions/ecu-postgraduate-show | `exhibitions-ecu-postgraduate-show-76472b94` | `src/app/exhibitions/[slug]/page.tsx` | 13 |
+| https://www.patriciaamorim.com/exhibitions/finding-our-place | `exhibitions-finding-our-place-336d22cd` | `src/app/exhibitions/[slug]/page.tsx` | 10 |
+| https://www.patriciaamorim.com/exhibitions/nexus | `exhibitions-nexus-8a514a53` | `src/app/exhibitions/[slug]/page.tsx` | 7 |
+| https://www.patriciaamorim.com/exhibitions/crossroads | `exhibitions-crossroads-a7fbfc09` | `src/app/exhibitions/[slug]/page.tsx` | 6 |
+| https://www.patriciaamorim.com/exhibitions/re-borrowing-arrows | `exhibitions-re-borrowing-arrows-2a60cd5b` | `src/app/exhibitions/[slug]/page.tsx` | 15 |
+| https://www.patriciaamorim.com/exhibitions/collective | `exhibitions-collective-39e1a92e` | `src/app/exhibitions/[slug]/page.tsx` | 6 |
+| https://www.patriciaamorim.com/exhibitions/here-now | `exhibitions-here-now-78ec3cf0` | `src/app/exhibitions/[slug]/page.tsx` | 4 |
+| https://www.patriciaamorim.com/exhibitions/the-artist-is-absent | `exhibitions-the-artist-is-absent-1580b11d` | `src/app/exhibitions/[slug]/page.tsx` | 7 |
 
 Per page: research in `docs/research/www-patriciaamorim-com-6f0fd8c4/<page-key>/`, screenshots in `docs/design-references/www-patriciaamorim-com-6f0fd8c4/<page-key>/`
 (`full-*.jpg` and `top-*.png` at desktop-1440, tablet-768, mobile-390), components and content in `src/components/sites/www-patriciaamorim-com-6f0fd8c4/<page-key>/`,
@@ -35,12 +46,14 @@ assets in `public/sites/www-patriciaamorim-com-6f0fd8c4/<page-key>/`, downloader
   content module, assets, screenshots and research folder.
 - `/project/mirage-reveries` ("Body Series") is linked only from /artwork and the project pages, not from the home page; it is included.
 - /artwork has no page-specific assets: it lists the shared project thumbnails.
+- The 11 exhibition detail pages are one CMS template too: one route file with 11 static params (`dynamicParams = false`),
+  components under `shared/exhibition/` that reuse the project hero and section view, and the /exhibitions page's
+  thumbnails for the list of other exhibitions. Template notes: `shared/components/ExhibitionPage.spec.md`.
 
 ## Shared foundation changes
 - Moved to `src/components/sites/www-patriciaamorim-com-6f0fd8c4/shared/`: SiteNavigation, SiteFooter, Preloader, MagneticLabel, ProjectScroller (were under `root-8a5edab2/`); nav/social data now in `shared/site.ts`.
 - Project thumbnails moved from `public/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/images/` to `shared/images/thumbs/<slug>.jpg` (16 files, downloader `-shared.mjs`).
 - `src/app/layout.tsx`: added Humane Medium (500) and Montserrat (Google). `src/app/globals.css`: `--color-divider`, `--font-body-alt`, `font-wght-550`, load-in keyframes.
 - `SiteNavigation` now marks the current page's link (wght 450); other links inherit 420.
-
-## Not cloned
-- `/exhibitions/<slug>` detail pages (11) — linked from /exhibitions and /about but outside this run's scope.
+- Exhibition pages: `SitePage` gained `footerInside`, `ProjectScroller` gained `titleTag`, `ProjectSection.layout` gained `"rows"`,
+  `RichBlock` gained bullet lists. `--font-body-alt` now names Montserrat directly so missing glyphs use the unadjusted system fallback.

@@ -46,16 +46,18 @@ export type RichInline =
   | { tag: "em" | "strong" | "span"; children: RichInline[] }
   | { tag: "a"; href: string; children: RichInline[] };
 
-export interface RichBlock {
-  tag: "h1" | "h2" | "h3" | "h4" | "p" | "blockquote";
-  children: RichInline[];
-}
+export type RichBlock =
+  | { tag: "h1" | "h2" | "h3" | "h4" | "p" | "blockquote"; children: RichInline[] }
+  | { tag: "ul"; items: RichInline[][] };
 
 export interface ProjectSection {
-  /** "stack": cover image, then a one-column gallery. "grid": two-column gallery only. */
-  layout: "stack" | "grid";
+  /**
+   * "stack": cover image, then a one-column gallery. "grid": two-column gallery only.
+   * "rows": the stack of the exhibition pages, one gallery image per grid row.
+   */
+  layout: "stack" | "grid" | "rows";
   cover?: SiteImage;
-  /** Looping clip shown after the cover image. */
+  /** Looping clip shown after the cover image; viewport-tall for "rows". */
   coverVideo?: SiteVideo;
   gallery: SiteImage[];
   /** Looping clip shown after the gallery. */
