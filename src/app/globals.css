@@ -7,8 +7,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-humane), sans-serif;
+  --font-serif-accent: var(--font-shocka-serif), sans-serif;
+  --color-canvas: #222;
+  --color-canvas-muted: #000;
+  --color-brand: #ba3737;
+  --color-dim: #808080;
+  --color-preloader: #16151a;
+  --font-mono: ui-monospace, monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -127,4 +134,25 @@
   html {
     @apply font-sans;
   }
+}
+/* Inter variable-axis presets used by the target (opsz 32, wght 420 / 450). */
+@utility font-wght-420 {
+  font-variation-settings: "opsz" 32, "wght" 420;
+}
+@utility font-wght-450 {
+  font-variation-settings: "opsz" 32, "wght" 450;
+}
+
+/* Social hover fills in the footer. */
+@utility bg-linkedin-hover {
+  background-image: linear-gradient(125deg, #0077b5 25%, #459cc9 66%, #d9ebf4 89%, #90c4df 100%, #fff);
+}
+@utility bg-linkedin-badge {
+  background-image: linear-gradient(132deg, #0077b5, #5ca8d0 52%, #fff);
+}
+@utility bg-instagram-hover {
+  background-image: repeating-linear-gradient(135deg, #0077b5, #5b51d8 12%, #833ab4 25%, #c13584 39%, #e1306c 51%, #fd1d1d 63%, #f56040 74%, #f77737 85%, #fcaf45 94%, #ffdc80);
+}
+@utility bg-instagram-badge {
+  background-image: repeating-linear-gradient(125deg, #0077b5, #5b51d8 11%, #833ab4 24%, #c13584 37%, #e1306c 48%, #fd1d1d 59%, #f56040 71%, #f77737 81%, #fcaf45 91%, #ffdc80 101%);
 }
