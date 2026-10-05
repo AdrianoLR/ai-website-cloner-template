@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -11,6 +12,7 @@ const inter = localFont({
 const humane = localFont({
   variable: "--font-humane",
   src: [
+    { path: "../../public/sites/www-patriciaamorim-com-6f0fd8c4/shared/fonts/Humane-Medium.otf", weight: "500", style: "normal" },
     { path: "../../public/sites/www-patriciaamorim-com-6f0fd8c4/shared/fonts/Humane-SemiBold.otf", weight: "600", style: "normal" },
     { path: "../../public/sites/www-patriciaamorim-com-6f0fd8c4/shared/fonts/Humane-Bold.otf", weight: "700", style: "normal" },
   ],
@@ -20,6 +22,13 @@ const humane = localFont({
 const shockaSerif = localFont({
   variable: "--font-shocka-serif",
   src: [{ path: "../../public/sites/www-patriciaamorim-com-6f0fd8c4/shared/fonts/ShockaSerif-Light.otf", weight: "400", style: "normal" }],
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -53,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${humane.variable} ${shockaSerif.variable} h-full antialiased`}
+      className={`${inter.variable} ${humane.variable} ${shockaSerif.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="font-wght-420 min-h-full bg-canvas text-[1rem] leading-[1.4] tracking-[-0.01em] text-white min-[1280px]:text-[1vw]">
         {children}

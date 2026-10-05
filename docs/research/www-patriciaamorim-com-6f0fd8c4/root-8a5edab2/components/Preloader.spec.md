@@ -1,7 +1,7 @@
 # Preloader Specification
 
 ## Overview
-- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/Preloader.tsx`
+- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/shared/Preloader.tsx`
 - **Screenshot:** `docs/design-references/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/preloader-desktop.png`
 - **Interaction model:** time-driven
 

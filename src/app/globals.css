@@ -10,6 +10,8 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-humane), sans-serif;
   --font-serif-accent: var(--font-shocka-serif), sans-serif;
+  --font-body-alt: var(--font-montserrat), sans-serif;
+  --color-divider: #ffffff1a;
   --color-canvas: #222;
   --color-canvas-muted: #000;
   --color-brand: #ba3737;
@@ -141,6 +143,37 @@
 }
 @utility font-wght-450 {
   font-variation-settings: "opsz" 32, "wght" 450;
+}
+
+@utility font-wght-550 {
+  font-variation-settings: "wght" 550, "opsz" 32;
+}
+
+/* Load-in for the contact heading: letters swing in from the right in sequence. */
+@keyframes letter-swing-in {
+  from {
+    transform: translate3d(5vw, 20vh, -15vw) rotateY(90deg);
+  }
+  to {
+    transform: translate3d(0, 0, 0) rotateY(0deg);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@utility animate-letter-in {
+  transform-style: preserve-3d;
+  animation:
+    letter-swing-in 1500ms cubic-bezier(0.425, 0.005, 0, 1) both,
+    fade-in 1300ms cubic-bezier(0.425, 0.005, 0, 1) both;
+}
+@utility animate-show-on-load {
+  animation: fade-in 1000ms cubic-bezier(0.425, 0.005, 0, 1) 2450ms both;
 }
 
 /* Social hover fills in the footer. */

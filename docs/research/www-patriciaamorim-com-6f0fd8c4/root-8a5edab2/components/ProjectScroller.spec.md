@@ -1,7 +1,7 @@
 # ProjectScroller Specification
 
 ## Overview
-- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/ProjectScroller.tsx`
+- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/shared/ProjectScroller.tsx`
 - **Screenshot:** `docs/design-references/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/desktop-top.png`, `desktop-item2.png`, `desktop-item2-mid.png`, `full-desktop-1440.png`
 - **Interaction model:** scroll-driven (JS scroll listener; no IntersectionObserver, no scroll-snap, no smooth-scroll library)
 
@@ -40,7 +40,7 @@
 - **Transition:** none (position tracks scroll directly).
 
 ### Thumbnail drift (>=992px only)
-- `.thumb-perspective` translateY `clamp(-15%, -12.2% + 31%·p, 15%)`; no transform at <=991px.
+- `.thumb-perspective` translateY `clamp(-15%, -12.75% + 30%·p, 15%)`; no transform at <=991px.
 
 ### Hover states
 - Title link: cursor pointer only.
@@ -49,7 +49,7 @@
 15 projects. Titles, hrefs, anchor ids and image files are listed in `content.ts` beside the component.
 
 ## Assets
-`public/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/images/01…15-*.jpg` — one image per block, no overlays.
+`public/sites/www-patriciaamorim-com-6f0fd8c4/shared/images/thumbs/<slug>.jpg` — one image per block, no overlays.
 
 ## Responsive Behavior
 - **1280–1439px:** no block margin.

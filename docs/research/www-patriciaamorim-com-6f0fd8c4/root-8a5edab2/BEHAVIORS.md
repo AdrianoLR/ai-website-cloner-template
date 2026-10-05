@@ -7,7 +7,7 @@ All values measured with getComputedStyle / getBoundingClientRect in Chromium.
 Title layer is `display:none` unless `0 < p < 1`; the `<h2>` is `translateY(100% - 200%·p)`
 (+100% entering from below, 0 when centred, -100% leaving). Verified: block 2 at scrollY 400 → 79.7%, at 1000 → 12.9%.
 
-**Thumbnail drift (>=992px only)** — `.thumb-perspective` translateY ≈ `clamp(-15%, -12.2% + 31%·p, 15%)`
+**Thumbnail drift (>=992px only)** — `.thumb-perspective` translateY = `clamp(-15%, -12.75% + 30%·p, 15%)` (IX2: -15% at 0, +15% at 85% of the pass, measured on the shifted box; re-derived when the inner pages were cloned)
 (measured -10.7% @p=.047, -3.6% @.269, 3.3% @.5, 9.6% @.713, 15% @.936). No drift at 768px or 390px.
 
 **Scroll indicator** — the marker whose block spans the viewport midline gets opacity 1, others 0.2

@@ -1,7 +1,7 @@
 # SiteFooter Specification
 
 ## Overview
-- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/SiteFooter.tsx` (icons in `../shared/icons.tsx`)
+- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/shared/SiteFooter.tsx` (icons in `shared/icons.tsx`)
 - **Screenshot:** `docs/design-references/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/desktop-footer.png`, `desktop-footer-hover.png`, `tablet-footer.png`, `mobile-footer.png`
 - **Interaction model:** static; hover on social links (>=992px)
 

@@ -1,7 +1,7 @@
 # SiteNavigation Specification
 
 ## Overview
-- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/SiteNavigation.tsx` (+ `MagneticLabel.tsx`)
+- **Target file:** `src/components/sites/www-patriciaamorim-com-6f0fd8c4/shared/SiteNavigation.tsx` (+ `shared/MagneticLabel.tsx`)
 - **Screenshot:** `docs/design-references/www-patriciaamorim-com-6f0fd8c4/root-8a5edab2/desktop-top.png`, `desktop-nav-hover.png`, `mobile-menu-open.png`, `tablet-menu-open.png`
 - **Interaction model:** hover-driven (label swap, magnetic nudge); click-driven menu at <=991px
 
