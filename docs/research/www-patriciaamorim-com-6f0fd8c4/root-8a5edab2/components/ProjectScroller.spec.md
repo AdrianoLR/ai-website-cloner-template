@@ -35,9 +35,15 @@
 
 ### Title slide
 - **Trigger:** scroll. `p = (vh - itemTop) / (vh + itemHeight)`.
-- **State A (p <= 0 or p >= 1):** layer `display: none`.
-- **State B (0 < p < 1):** layer `display: flex`; h2 `translateY(100% - 200%·p)`.
+- h2 `translateY(100% - 200%·p)` for `0 < p < 1`.
 - **Transition:** none (position tracks scroll directly).
+
+### Title show / hide
+- **Trigger:** IX2 scroll-into-view / scroll-out-of-view on the block, 5% offset: in view while `top <= 95vh` and `bottom >= 5vh`.
+- **State A (out of view):** h2 opacity 0, then layer `display: none`.
+- **State B (in view):** layer `display: flex`, h2 opacity 1.
+- **Transition:** opacity 250ms `ease` both ways; the layer is hidden only after the fade-out ends.
+- **Implementation approach:** scroll listener toggling the layer and the h2's opacity (CSS transition).
 
 ### Thumbnail drift (>=992px only)
 - `.thumb-perspective` translateY `clamp(-15%, -12.75% + 30%·p, 15%)`; no transform at <=991px.

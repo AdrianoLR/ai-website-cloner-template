@@ -195,3 +195,16 @@
 @utility bg-instagram-badge {
   background-image: repeating-linear-gradient(125deg, #0077b5, #5b51d8 11%, #833ab4 24%, #c13584 37%, #e1306c 48%, #fd1d1d 59%, #f56040 71%, #f77737 81%, #fcaf45 91%, #ffdc80 101%);
 }
+
+/* Ticker on the 404 page: each copy slides one full width to the left, then repeats. */
+@keyframes loop-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@utility animate-loop-left {
+  animation: loop-left 30s linear infinite;
+}

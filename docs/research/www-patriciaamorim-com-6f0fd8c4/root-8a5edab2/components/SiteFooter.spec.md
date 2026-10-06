@@ -39,7 +39,7 @@
 ## States & Behaviors
 
 ### Hover states
-- **Social link:** gradient disc scale 0 → 1.
+- **Social link (>=992px):** the gradient disc is shown at rest (scale 1, no initial state set). Hover: scale 1 → 0 over 300ms, outSine `cubic-bezier(.39,.575,.565,1)`. Leave: scale 0 → 1 over 300ms, outExpo `cubic-bezier(.19,1,.22,1)`. Measured frame by frame in Chromium.
 
 ## Text Content (verbatim)
 Let’s Connect

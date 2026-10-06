@@ -19,10 +19,14 @@ interface ProjectScrollerProps {
   titleTag?: "h1" | "h2";
 }
 
+// Matches the title's opacity transition.
+const TITLE_FADE_MS = 250;
+
 /**
  * One full-viewport block per item. Each block owns a fixed, screen-blended
  * title that slides from +100% to -100% while the block crosses the viewport,
  * and a thumbnail that drifts from -15% to +15% over the same pass (desktop only).
+ * A title fades in when its block comes into view and fades out before its layer is hidden.
  */
 export function ProjectScroller({
   items,
@@ -38,10 +42,15 @@ export function ProjectScroller({
 
   useEffect(() => {
     let frame = 0;
+    // Only the first title layer is rendered visible.
+    const shown = itemRefs.current.map((_, index) => index === 0);
+    const hideTimers: number[] = [];
 
     const update = () => {
       frame = 0;
       const viewport = window.innerHeight;
+      // A block counts as in view once it is 5% of the viewport past either edge.
+      const edge = viewport * 0.05;
       // The thumbnail drift only runs on the desktop layout.
       const parallax = window.innerWidth >= 992;
       itemRefs.current.forEach((item, index) => {
@@ -53,10 +62,23 @@ export function ProjectScroller({
         const rect = item.getBoundingClientRect();
         // 0 when the block's top meets the viewport bottom, 1 when its bottom leaves the top.
         const progress = (viewport - rect.top) / (viewport + rect.height);
-        const inView = progress > 0 && progress < 1;
+        const inView = rect.top <= viewport - edge && rect.bottom >= edge;
 
-        layer.style.display = inView ? "flex" : "none";
-        if (inView) {
+        if (inView && !shown[index]) {
+          shown[index] = true;
+          window.clearTimeout(hideTimers[index]);
+          layer.style.display = "flex";
+          // Lay the title out at its current opacity first so the fade has a start value.
+          void title.offsetWidth;
+          title.style.opacity = "1";
+        } else if (!inView && shown[index]) {
+          shown[index] = false;
+          title.style.opacity = "0";
+          hideTimers[index] = window.setTimeout(() => {
+            layer.style.display = "none";
+          }, TITLE_FADE_MS);
+        }
+        if (progress > 0 && progress < 1) {
           title.style.transform = `translate3d(0, ${100 - 200 * progress}%, 0)`;
         }
         if (parallax) {
@@ -79,6 +101,7 @@ export function ProjectScroller({
     window.addEventListener("resize", schedule);
     return () => {
       cancelAnimationFrame(frame);
+      hideTimers.forEach((timer) => window.clearTimeout(timer));
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
@@ -116,7 +139,10 @@ export function ProjectScroller({
                     ref={(node) => {
                       titleRefs.current[index] = node;
                     }}
-                    className="relative m-0 px-[0.2em] pt-[0.13em] text-center font-display text-[24em] leading-[0.8] font-bold tracking-[-0.01em] whitespace-pre-wrap text-brand uppercase will-change-transform max-[991px]:text-[12em] max-[991px]:leading-[0.7] max-[767px]:text-[8em] max-[479px]:text-[6em]"
+                    className={cn(
+                      "relative m-0 px-[0.2em] pt-[0.13em] text-center font-display text-[24em] leading-[0.8] font-bold tracking-[-0.01em] whitespace-pre-wrap text-brand uppercase transition-opacity duration-[250ms] ease-[ease] will-change-transform max-[991px]:text-[12em] max-[991px]:leading-[0.7] max-[767px]:text-[8em] max-[479px]:text-[6em]",
+                      index !== 0 && "opacity-0",
+                    )}
                   >
                     {item.title}
                   </TitleTag>

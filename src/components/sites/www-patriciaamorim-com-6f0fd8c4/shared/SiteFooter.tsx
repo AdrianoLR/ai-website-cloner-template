@@ -8,7 +8,7 @@ interface SocialButton {
   label: string;
   href: string;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
-  /** Fill revealed on hover (desktop). */
+  /** Circle fill shown at rest and collapsed while hovered (desktop). */
   hoverFill: string;
   /** Permanent badge fill at 991px and below. */
   badgeFill: string;
@@ -63,7 +63,7 @@ export function SiteFooter() {
                 </div>
                 <div
                   className={cn(
-                    "absolute size-full scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100 max-[991px]:hidden",
+                    "absolute size-full rounded-full transition-transform duration-300 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-0 group-hover:ease-[cubic-bezier(0.39,0.575,0.565,1)] max-[991px]:hidden",
                     hoverFill,
                   )}
                 />

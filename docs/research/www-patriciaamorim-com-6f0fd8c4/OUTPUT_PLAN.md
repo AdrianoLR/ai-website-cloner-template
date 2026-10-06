@@ -35,6 +35,7 @@ Single application (app root `.`), site key `www-patriciaamorim-com-6f0fd8c4`. T
 | https://www.patriciaamorim.com/exhibitions/collective | `exhibitions-collective-39e1a92e` | `src/app/exhibitions/[slug]/page.tsx` | 6 |
 | https://www.patriciaamorim.com/exhibitions/here-now | `exhibitions-here-now-78ec3cf0` | `src/app/exhibitions/[slug]/page.tsx` | 4 |
 | https://www.patriciaamorim.com/exhibitions/the-artist-is-absent | `exhibitions-the-artist-is-absent-1580b11d` | `src/app/exhibitions/[slug]/page.tsx` | 7 |
+| https://www.patriciaamorim.com/404 (any unknown path) | `404-316556f0` | `src/app/not-found.tsx` | 0 |
 
 Per page: research in `docs/research/www-patriciaamorim-com-6f0fd8c4/<page-key>/`, screenshots in `docs/design-references/www-patriciaamorim-com-6f0fd8c4/<page-key>/`
 (`full-*.jpg` and `top-*.png` at desktop-1440, tablet-768, mobile-390), components and content in `src/components/sites/www-patriciaamorim-com-6f0fd8c4/<page-key>/`,
@@ -57,3 +58,5 @@ assets in `public/sites/www-patriciaamorim-com-6f0fd8c4/<page-key>/`, downloader
 - `SiteNavigation` now marks the current page's link (wght 450); other links inherit 420.
 - Exhibition pages: `SitePage` gained `footerInside`, `ProjectScroller` gained `titleTag`, `ProjectSection.layout` gained `"rows"`,
   `RichBlock` gained bullet lists. `--font-body-alt` now names Montserrat directly so missing glyphs use the unadjusted system fallback.
+- The 404 page is Webflow's utility page: no preloader, navigation or footer. It is the app's `not-found.tsx`, so it is served
+  with status 404 for every unknown path, as on the source. `globals.css` gained the `loop-left` keyframes for its ticker.
